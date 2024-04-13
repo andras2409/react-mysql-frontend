@@ -26,7 +26,7 @@ import Summary from './components/Summary.jsx';
 function Buffet() {
 
     useEffect(() => {
-        fetch('http://localhost:8081/product')
+        fetch('https://react-mysql-backend.onrender.com/products')
         .then(res => res.json())
         .then(products => setProducts(products))
         .catch(err => console.log(err));
