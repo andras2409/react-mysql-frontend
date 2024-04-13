@@ -10,7 +10,7 @@ function LoginPage() {
     const [employee, setEmployee] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:8081/employee')
+        fetch('https://react-mysql-backend.onrender.com/employee')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
