@@ -10,7 +10,7 @@ function LoginPage() {
     const [employee, setEmployee] = useState('');
 
     useEffect(() => {
-        fetch('https://react-mysql-backend.onrender.com/employee')
+        fetch('https://react-mysql-backend.onrender.com/employees')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
