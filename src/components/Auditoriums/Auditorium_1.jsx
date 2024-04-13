@@ -71,6 +71,7 @@ const Auditorium_1 = ({ ticketBasket, paymentMethod, movieNumber, currentAud, ti
     console.log(soldSeats);
 
     function genericHandleTicketClicked(newTicket) {
+        console.log('ticket clicked: ' + newTicket)
         HandleItemClicked( 
             newTicket, 
             transactionInprogress, 
