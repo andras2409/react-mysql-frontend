@@ -17,6 +17,25 @@ export function ItemClicked(newItem, basket, price){
     price += parseInt(newItem.price);
 }
 
+export function TicketClicked(newTicket, basket, price){
+        
+    let itemFound = false;
+
+    for (let i = 0; i < basket.length; i++) {
+        if (basket[i].category === newTicket.category) {
+            basket[i].amount++;
+            itemFound = true;
+            break;
+        }
+    }
+
+    if (!itemFound) {
+        basket.push({category: newTicket.category, price: newTicket.price, amount: 1});
+    }
+
+    price += parseInt(newTicket.price);
+}
+
 export function IncreaseItemAmount(indexToIncrease, price, basket, setBasket, setPrice) {
     setBasket(currentBasket => 
         currentBasket.map((item, index) => 

@@ -13,7 +13,7 @@ import {
     DeleteLocalStorage, 
     BanknoteClicked,
     HandleKeypadClicked,
-    ItemClicked,
+    TicketClicked,
     IncreaseItemAmount,
     DecreaseItemAmount,
     DeleteItem
@@ -255,9 +255,11 @@ function Cashier() {
 
     useEffect(() => {
         if (transactionInprogress && ticketIsClicked && ticketClicked != null) {
-            ItemClicked(ticketClicked, ticketBasket, price);
+            TicketClicked(ticketClicked, ticketBasket, price);
             setTicketBasket([...ticketBasket]);
             setPrice(price + parseInt(ticketClicked.price));
+            console.log(ticketClicked.category);
+            console.log(ticketBasket);
         }
         setTicketClicked(null);
         setDisplayPrice(price);
@@ -266,7 +268,7 @@ function Cashier() {
                 {ticketBasket.map((ticket, index) => (
                     <li className={'list-group-item d-flex justify-content-between p-1'} key={index}>
                         <div className='d-flex justify-content-center align-items-center'>
-                            {ticket.name}
+                            {ticket.category}
                         </div>
                         <div className='btn-group col-6'>
                             <div className='d-flex col-8'>
