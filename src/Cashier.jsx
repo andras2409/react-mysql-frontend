@@ -27,7 +27,7 @@ import Trash from './components/Trash.jsx';
 function Cashier() {
 
     useEffect(() => {
-        fetch('http://localhost:8081/ticket')
+        fetch('https://react-mysql-backend.onrender.com/tickets')
         .then(res => res.json())
         .then(tickets => setTickets(tickets))
         .catch(err => console.log(err));
