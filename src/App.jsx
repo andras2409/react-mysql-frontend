@@ -6,6 +6,19 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  const [data, setData] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [employee, setEmployee] = useState('');
+
+    useEffect(() => {
+        fetch('https://react-mysql-backend.onrender.com/employees')
+        .then(res => res.json())
+        .then(data => setData(data))
+        .catch(err => console.log(err));
+    }, [])
+
+    console.log(data);
+
   return (
     <>
       <div>
