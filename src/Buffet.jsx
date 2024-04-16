@@ -406,7 +406,7 @@ function Buffet() {
                     />
                 </div>
                 <div className='d-flex flex-column justify-content-between col-1 bg-dark p-2'>
-                    <DropdownButton title={currentPage}>
+                    <DropdownButton title={currentPage} buttonClass={"dropdown-toggle"}>
                         <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
                         <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('summary')}>Summary</Button>
                     </DropdownButton>

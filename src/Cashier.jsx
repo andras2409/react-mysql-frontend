@@ -443,9 +443,9 @@ function Cashier() {
                         {displayAuditorium}      
                     </div>
                     <BankNoteButtons 
-                        className={'col'}
+                        className={'col-1'}
                         topButton={
-                            <DropdownButton buttonClass={'m-1 pt-2 pb-2'} title={currentPage}>
+                            <DropdownButton buttonClass={'m-1 pt-2 pb-2 d-flex align-content-center justify-content-center'} title={currentPage}>
                                 <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
                                 <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('summary')} >Summary</Button>
                             </DropdownButton>
