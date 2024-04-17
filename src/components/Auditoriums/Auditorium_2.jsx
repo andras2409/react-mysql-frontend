@@ -1,9 +1,8 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TicketMenu from '../TicketMenu';
 import { HandleItemClicked, SaveTickets } from '../../calculator';
 
-const Auditorium_2 = ({ ticketBasket, paymentMethod, movieNumber, currentAud, tickets, setCurrentAud, transactionInprogress, setTransactionInprogress, setPaymentMethod, setTicketClicked, setTicketIsClicked, setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked }) => {
+const Auditorium_2 = ({ setTransactionPossible, ticketBasket, paymentMethod, movieNumber, currentAud, tickets, setCurrentAud, transactionInprogress, setTransactionInprogress, setPaymentMethod, setTicketClicked, setTicketIsClicked, setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked }) => {
 
     const seats = document.querySelectorAll('.seat');
     const [numberOfTickets, setNumberOfTickets] = useState(0);
@@ -12,6 +11,14 @@ const Auditorium_2 = ({ ticketBasket, paymentMethod, movieNumber, currentAud, ti
     const screeningId = `auditorium_${currentAud}_movie_${movieNumber}`;
     const [savedSeats, setSavedSeats] = useState(() => JSON.parse(localStorage.getItem(`auditorium_${currentAud}_movie_${movieNumber}`)) || []);
     const [seatsLoaded, setSeatsLoaded] = useState(false);
+
+    useEffect(() => {
+        if (numberOfTickets === selectedTickets && numberOfTickets > 0 && selectedTickets > 0) {
+            setTransactionPossible(true);
+        } else {
+            setTransactionPossible(false);
+        }
+    },[numberOfTickets, selectedTickets]);
 
     useEffect(() => {
         setSeatsLoaded(true);
