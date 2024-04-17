@@ -407,6 +407,7 @@ function Cashier() {
             setDisplayAuditorium(
                 <>
                     <Auditorium_2 
+                        setTransactionPossible={setTransactionPossible}
                         ticketBasket={ticketBasket} 
                         paymentMethod={paymentMethod} 
                         movieNumber={currentSerialNumber} 
