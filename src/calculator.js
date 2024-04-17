@@ -91,6 +91,21 @@ export function CreditPayment(setTransactionInprogress, setPaymentMethod, price,
     }
 }
 
+export function CashPaymentCashier(transactionPossible, price, amountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress) {
+    if (amountReceived >= price && price != 0 && paymentMethod === '' && transactionInprogress && transactionPossible) {
+        setChange(amountReceived - price);
+        setTransactionInprogress(false);
+        setPaymentMethod('cash');
+    }
+}
+
+export function CreditPaymentCashier(transactionPossible, setTransactionInprogress, setPaymentMethod, price, paymentMethod, transactionInprogress) {
+    if (price > 0 && paymentMethod === '' && transactionInprogress && transactionPossible) {
+        setTransactionInprogress(false);
+        setPaymentMethod('credit');
+    }
+}
+
 export function DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived) {
     if (transactionInprogress || paymentMethod === '') {
         setAmountReceived(0);
@@ -120,6 +135,19 @@ export function BanknoteClicked(e, transactionInprogress, price, setBanknoteWasC
         setBanknoteWasClicked(true);
         setAmountReceived(banknote);
         CashPayment(price, banknote, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress);
+    }
+    if (paymentMethod !== '') {
+        setPaymentMethod('');
+        DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
+    }
+}
+
+export function BanknoteClickedCashier(e, transactionPossible, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction) {
+    let banknote = e.target.value;
+    if (transactionInprogress && banknote >= price && price > 0 && transactionPossible) {
+        setBanknoteWasClicked(true);
+        setAmountReceived(banknote);
+        CashPaymentCashier(transactionPossible, price, banknote, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress);
     }
     if (paymentMethod !== '') {
         setPaymentMethod('');

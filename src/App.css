@@ -86,3 +86,7 @@ html, body {
     justify-content: center;
     align-items: center;
 }
+
+.ticket-btn{
+    width: 20%;
+}

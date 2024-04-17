@@ -6,12 +6,12 @@ import Keypad from './components/Keypad';
 import DropdownButton from './components/DropdownButton';
 import { 
     DeleteBasket, 
-    CashPayment, 
-    CreditPayment, 
+    CashPaymentCashier, 
+    CreditPaymentCashier, 
     SaveItems, 
     DeleteNumbers, 
     DeleteLocalStorage, 
-    BanknoteClicked,
+    BanknoteClickedCashier,
     HandleKeypadClicked,
     TicketClicked,
     IncreaseItemAmount,
@@ -45,6 +45,7 @@ function Cashier() {
     const [amountReceived, setAmountReceived] = useState(0);
     const [banknoteWasClicked, setBanknoteWasClicked] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState('');
+    const [transactionPossible, setTransactionPossible] = useState(false);
 
     const [totalCash, setTotalCash] = useState(() => JSON.parse(localStorage.getItem('totalCash')) || 0);
     const [totalCredit, setTotalCredit] = useState(() => JSON.parse(localStorage.getItem('totalCredit')) || 0);
@@ -379,6 +380,7 @@ function Cashier() {
             setDisplayAuditorium(
                 <>
                     <Auditorium_1 
+                        setTransactionPossible={setTransactionPossible}
                         ticketBasket={ticketBasket} 
                         paymentMethod={paymentMethod} 
                         movieNumber={currentSerialNumber} 
@@ -450,7 +452,7 @@ function Cashier() {
                                 <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('summary')} >Summary</Button>
                             </DropdownButton>
                         }
-                        onClick={(e) => BanknoteClicked(e, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setTicketBasket, setPrice, setDisplayTransaction)}
+                        onClick={(e) => BanknoteClickedCashier(e, transactionPossible, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setTicketBasket, setPrice, setDisplayTransaction)}
                     >
                         <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked)}>Delete Basket</Button>
                         <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteLocalStorage()}>Delete Storage</Button>
@@ -479,8 +481,8 @@ function Cashier() {
                     </div>
                     <Keypad 
                         keypad={(e) => HandleKeypadClicked(e, banknoteWasClicked, transactionInprogress, paymentMethod, setTransactionInprogress, amountReceived, setAmountReceived, setTicketBasket, setDisplayTransaction, setPrice, setPaymentMethod, setChange, setBanknoteWasClicked)}
-                        cash={() => CashPayment(price, amountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress)}
-                        credit={() => CreditPayment(setTransactionInprogress, setPaymentMethod, price, paymentMethod, transactionInprogress)}
+                        cash={() => CashPaymentCashier(transactionPossible, price, amountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress)}
+                        credit={() => CreditPaymentCashier(transactionPossible, setTransactionInprogress, setPaymentMethod, price, paymentMethod, transactionInprogress)}
                     />
                 </div>
             </div>
