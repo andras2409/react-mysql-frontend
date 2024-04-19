@@ -353,14 +353,14 @@ function Buffet() {
         <> 
             <div className='d-flex vh-100'>
                 <div className='d-flex col-8 bg-dark bg-gradient p-1'>
-                    <div className='d-flex flex-column flex-fill col-11'>
+                    <div className='d-flex flex-column flex-fill col-11 overflow-auto'>
                         <div className="d-flex col-12">
                             <div className='col-8'>
-                                <ProductGroup  divClass={'d-flex'} className={'btn btn-primary col-1 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcorn')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex'} className={'btn bg-primary-subtle col-1 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcornmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex'} className={'btn bg-danger-subtle col-1 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'pepsidrink')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex'} className={'btn btn-primary col-1 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachos')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex'} className={'btn bg-primary-subtle col-1 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachosmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                <ProductGroup  divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcorn')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcornmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-danger-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'pepsidrink')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachos')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachosmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
                             </div>
                             <ProductGroup divClass={'col-2 d-flex flex-column'} className={'btn btn-dark flex-fill m-1'} items={products.filter(products => products.type === 'extra')} onClick={(e) => genericHandleItemClicked(e)}/>
                             <div className='d-flex flex-column col-2'>
