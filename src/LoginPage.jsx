@@ -25,6 +25,8 @@ function LoginPage() {
             if (user.username === username && user.password === password) {
                 setLoggedIn(true);
                 setEmployee(user);
+            } else {
+                console.log("login failed");
             }
         });
     }
