@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import TicketMenu from '../TicketMenu';
-import { HandleItemClicked, SaveTickets } from '../../calculator';
+import { HandleItemClicked, SaveTickets, SaveReservations } from '../../calculator';
 
-const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, movieNumber, currentAud, tickets, setCurrentAud, transactionInprogress, setTransactionInprogress, setPaymentMethod, setTicketClicked, setTicketIsClicked, setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked }) => {
+const Auditorium_1 = ({setReservationSaved, reservationSaved, setTransactionPossible, ticketBasket, paymentMethod, movieNumber, currentAud, tickets, setCurrentAud, transactionInprogress, setTransactionInprogress, setPaymentMethod, setTicketClicked, setTicketIsClicked, setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked }) => {
 
     const seats = document.querySelectorAll('.seat');
     const [numberOfTickets, setNumberOfTickets] = useState(0);
     const [selectedTickets, setSelectedTickets] = useState(0);
     const [soldSeats, setSoldSeats] = useState([]);
     const screeningId = `auditorium_${currentAud}_movie_${movieNumber}`;
+
+    const reservationId = `auditorium_${currentAud}_movie_${movieNumber}_reservation`;
+    const [reservationInProg, setReservationInProg] = useState(false);
+    const [reservedSeats, setReservedSeats] = useState('');
+    const [savedReservations, setSavedReservations] = useState(() => JSON.parse(localStorage.getItem(`auditorium_${currentAud}_movie_${movieNumber}_reservation`)) || []);
+    console.log(savedReservations);
     const [savedSeats, setSavedSeats] = useState(() => JSON.parse(localStorage.getItem(`auditorium_${currentAud}_movie_${movieNumber}`)) || []);
     const [seatsLoaded, setSeatsLoaded] = useState(false);
+    console.log(savedSeats);
+
+    function handleReservation() {
+        console.log('handleReservation');
+        setReservationInProg(false);
+        setSavedReservations(prevReservations => {
+            const newReservations = [...prevReservations, reservedSeats];
+            localStorage.setItem(reservationId, JSON.stringify(newReservations));
+            return newReservations;
+        });
+    }
+    
 
     useEffect(() => {
         if (numberOfTickets === selectedTickets && numberOfTickets > 0 && selectedTickets > 0) {
@@ -28,7 +46,17 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
                 seat.classList.add('occupied');
             }
         })
-    },[screeningId, savedSeats, seats, seatsLoaded]);
+        savedReservations.forEach((reservation) => {
+            reservation.forEach((reservedSeat) => {
+                seats.forEach((seat) => {
+                    const seatValue = seat.getAttribute('data-value');
+                    if (reservedSeat === seatValue) {
+                        seat.classList.add('reserved');
+                    }
+                });
+            });
+        });
+    },[screeningId, savedSeats, seats, seatsLoaded, savedReservations]);
 
     useEffect(() => {
         localStorage.setItem(screeningId, JSON.stringify(savedSeats));
@@ -41,6 +69,7 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
 
     function setClicked(e) {
         const seatValue = e.target.getAttribute('data-value');
+        console.log('seat clicked: ', seatValue);
         if (e.target.classList.contains('seat') && !e.target.classList.contains('reserved') && !e.target.classList.contains('occupied')  && !e.target.classList.contains('selected') && numberOfTickets > selectedTickets) {
             e.target.classList.toggle('selected');
             setSelectedTickets((prev) => prev + 1);
@@ -49,6 +78,19 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
             e.target.classList.remove('selected');
             setSelectedTickets((prev) => prev - 1);
             setSoldSeats((prevSeats) => prevSeats.filter((seat) => seat !== seatValue));
+        }
+
+        if (numberOfTickets === 0 && selectedTickets === 0 && e.target.classList.contains('seat') && !e.target.classList.contains('occupied') && !e.target.classList.contains('reserved')) {
+            e.target.classList.add('reserved');
+            setReservedSeats((prev) => [...prev, seatValue]);
+            setReservationInProg(true);
+            console.log(reservedSeats);
+        } else if (numberOfTickets === 0 && selectedTickets === 0 && e.target.classList.contains('reserved') && e.target.classList.contains('seat')) {
+            e.target.classList.remove('reserved');
+            setReservedSeats((prev) => prev.filter((reserv) => reserv !== seatValue));
+            if (reservedSeats.length === 0) {
+                setReservationInProg(false);
+            }
         }
     }
 
@@ -75,8 +117,6 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
             SaveTickets(soldSeats, savedSeats);
         }
     },[paymentMethod, soldSeats]);
-
-    console.log(soldSeats);
 
     function genericHandleTicketClicked(newTicket) {
         console.log('ticket clicked: ' + newTicket.category)
@@ -819,7 +859,7 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
                     </div>
                 </div>
             </div>
-            <TicketMenu back={() => setCurrentAud(0)} tickets={tickets} onClick={(e) => genericHandleTicketClicked(e)}/>
+            <TicketMenu back={() => setCurrentAud(0)} tickets={tickets} onClick={(e) => genericHandleTicketClicked(e)} onClickReservation={() => handleReservation()}/>
         </>
     )
 }

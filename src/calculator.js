@@ -125,6 +125,15 @@ export function SaveTickets(soldSeats, savedSeats) {
     }
 }
 
+export function SaveReservations(reservedSeats, savedReservations) {
+    for (let i = 0; i < reservedSeats.length; i++) {
+        console.log('savedReservations before push', savedReservations);
+
+        savedReservations.push(reservedSeats[i]);
+        console.log('reservations saved');
+    }
+}
+
 export function DeleteLocalStorage() {
     localStorage.clear();
 }

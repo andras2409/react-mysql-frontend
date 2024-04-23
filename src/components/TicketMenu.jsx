@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from './Button';
 
-const TicketMenu = ({ back, tickets, onClick }) => {
+const TicketMenu = ({ back, tickets, onClick, onClickReservation }) => {
     // State to keep track of the starting index of the visible tickets
     const [startIndex, setStartIndex] = useState(0);
     const visibleTicketCount = 5; // Number of tickets to display at once
@@ -44,7 +44,7 @@ const TicketMenu = ({ back, tickets, onClick }) => {
                 </div>
                 <Button className={'btn btn-secondary col-1 m-0 ms-0'} onClick={handleNext}>Next</Button>
             </div>
-            
+            <Button className={'btn btn-primary reservation-btn'} onClick={() => onClickReservation()}>Save Reservation</Button>
         </div>
     );
 }

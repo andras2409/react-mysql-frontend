@@ -90,3 +90,10 @@ html, body {
 .ticket-btn{
     width: 20%;
 }
+
+.reservation-btn{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

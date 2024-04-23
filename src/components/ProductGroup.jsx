@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProductGroup = ({ divClass, className, items, onClick }) => {
+function ProductGroup ({ divClass, className, items, onClick }) {
     return (
         <>  
             <div className={divClass}>

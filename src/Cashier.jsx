@@ -71,6 +71,8 @@ function Cashier() {
     const [currentAud, setCurrentAud] = useState(0);
     const [currentSerialNumber, setCurrentSerialNumber] = useState(0);
 
+    const [reservationSaved, setReservationSaved] = useState(false);
+
     useEffect(() => {
         localStorage.setItem('totalCash', JSON.stringify(totalCash));
         localStorage.setItem('totalCredit', JSON.stringify(totalCredit));
@@ -380,6 +382,8 @@ function Cashier() {
             setDisplayAuditorium(
                 <>
                     <Auditorium_1 
+                        setReservationSaved={setReservationSaved}
+                        reservationSaved={reservationSaved}
                         setTransactionPossible={setTransactionPossible}
                         ticketBasket={ticketBasket} 
                         paymentMethod={paymentMethod} 
@@ -407,6 +411,8 @@ function Cashier() {
             setDisplayAuditorium(
                 <>
                     <Auditorium_2 
+                        setReservationSaved={setReservationSaved}
+                        reservationSaved={reservationSaved}
                         setTransactionPossible={setTransactionPossible}
                         ticketBasket={ticketBasket} 
                         paymentMethod={paymentMethod} 
