@@ -16,6 +16,10 @@ function LoginPage() {
         .catch(err => console.log(err));
     }, [])
 
+    useEffect(() => {
+        console.log(data);
+    });
+
     const handleLogin = () => {
 
         const username = document.getElementById('login-username').value;

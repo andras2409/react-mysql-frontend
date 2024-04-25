@@ -38,7 +38,7 @@ function Buffet() {
     const [basket, setBasket] = useState([]);
     const [price, setPrice] = useState(0);
     const [change, setChange] = useState(0);
-    const [transactionInprogress, setTransactionInprogress] = useState(false);
+    const [transactionInProgress, setTransactionInProgress] = useState(false);
     const [itemIsClicked, setItemIsClicked] = useState(true);
     const [itemClicked, setItemClicked] = useState(null);
     const [amountReceived, setAmountReceived] = useState(0);
@@ -76,9 +76,9 @@ function Buffet() {
     function genericHandleItemClicked(newItem) {
         HandleItemClicked( 
             newItem, 
-            transactionInprogress, 
+            transactionInProgress, 
             paymentMethod, 
-            setTransactionInprogress, 
+            setTransactionInProgress, 
             setPaymentMethod, 
             setItemClicked, 
             setItemIsClicked, 
@@ -105,7 +105,7 @@ function Buffet() {
             );
             setWithdrawal(false);
             setCurrentWithdrawalAmount(0);
-            DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived)
+            DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived)
         }
     }
 
@@ -123,13 +123,13 @@ function Buffet() {
             );
             setDeposit(false);
             setCurrentDeposit(0);
-            DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+            DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
         }
     }
 
     useEffect(() => {
         if (deposit) {
-            if (transactionInprogress && paymentMethod === '') {
+            if (transactionInProgress && paymentMethod === '') {
                 if (price === 0) {
                     setTotalDeposit(parseInt(totalDeposit) + parseInt(currentDeposit));
                     setDisplayTransaction(
@@ -142,7 +142,7 @@ function Buffet() {
                     );
                     setDeposit(false);
                     setCurrentDeposit(0);
-                    DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                    DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                 } else {
                     setDisplayTransaction(
                         <ul className='list-group'>
@@ -153,11 +153,11 @@ function Buffet() {
                     );
                     setDeposit(false);
                     setCurrentDeposit(0);
-                    DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                    DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                 }
                 
             }
-            if (!transactionInprogress) {
+            if (!transactionInProgress) {
                 if (paymentMethod === '') {
                     setTotalDeposit(parseInt(totalDeposit) + parseInt(currentDeposit));
                     setDisplayTransaction(
@@ -170,7 +170,7 @@ function Buffet() {
                     );
                     setDeposit(false);
                     setCurrentDeposit(0);
-                    DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                    DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                 } else {
                     setDisplayTransaction(
                         <ul className='list-group'>
@@ -185,12 +185,12 @@ function Buffet() {
                 }
             }
         }
-    },[deposit, totalDeposit, currentDeposit, transactionInprogress, paymentMethod, price]);
+    },[deposit, totalDeposit, currentDeposit, transactionInProgress, paymentMethod, price]);
 
     useEffect(() => {
         if (withdrawal) {
             if (parseInt(totalCash) >= parseInt(totalWithdrawal) + parseInt(currentWithdrawalAmount)) {
-                if (transactionInprogress && paymentMethod === '') {
+                if (transactionInProgress && paymentMethod === '') {
                     if (price === 0) {
                         setTotalWithdrawal(parseInt(totalWithdrawal) + parseInt(currentWithdrawalAmount));
                         setDisplayTransaction(
@@ -203,7 +203,7 @@ function Buffet() {
                         );
                         setWithdrawal(false);
                         setCurrentWithdrawalAmount(0);
-                        DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                        DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                     } else {
                         setDisplayTransaction(
                             <ul className='list-group'>
@@ -214,11 +214,11 @@ function Buffet() {
                         );
                         setWithdrawal(false);
                         setCurrentWithdrawalAmount(0);
-                        DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                        DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                     }
                     
                 }
-                if (!transactionInprogress) {
+                if (!transactionInProgress) {
                     if (paymentMethod === '') {
                         setTotalWithdrawal(parseInt(totalWithdrawal) + parseInt(currentWithdrawalAmount));
                         setDisplayTransaction(
@@ -231,7 +231,7 @@ function Buffet() {
                         );
                         setWithdrawal(false);
                         setCurrentWithdrawalAmount(0);
-                        DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                        DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                     } else {
                         setDisplayTransaction(
                             <ul className='list-group'>
@@ -242,7 +242,7 @@ function Buffet() {
                         );
                         setWithdrawal(false);
                         setCurrentWithdrawalAmount(0);
-                        DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                        DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                     }
                 }
             } else {
@@ -255,13 +255,13 @@ function Buffet() {
                 );
                 setWithdrawal(false);
                 setCurrentWithdrawalAmount(0);
-                DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
             }
         }
-    },[withdrawal, transactionInprogress, paymentMethod, totalCash, totalWithdrawal, currentWithdrawalAmount]);
+    },[withdrawal, transactionInProgress, paymentMethod, totalCash, totalWithdrawal, currentWithdrawalAmount]);
 
     useEffect(() => {
-        if (transactionInprogress && itemIsClicked && itemClicked != null) {
+        if (transactionInProgress && itemIsClicked && itemClicked != null) {
             ItemClicked(itemClicked, basket, price);
             setBasket([...basket]);
             setPrice(price + parseInt(itemClicked.price));
@@ -287,13 +287,13 @@ function Buffet() {
                 ))}
             </ul>
         );
-    },[transactionInprogress, itemIsClicked, itemClicked, basket, price]);
+    },[transactionInProgress, itemIsClicked, itemClicked, basket, price]);
 
     useEffect(() => {
-        if (!transactionInprogress && price === 0) {
+        if (!transactionInProgress && price === 0) {
             setDisplayPrice(price);
             setDisplayAmount(amountReceived);
-        } else if (transactionInprogress) {
+        } else if (transactionInProgress) {
             setDisplayPrice(price);
             setDisplayAmount(amountReceived);
         } else {
@@ -301,7 +301,7 @@ function Buffet() {
             setDisplayAmount('Change: ' + change);
         }
 
-        if (!transactionInprogress) {
+        if (!transactionInProgress) {
             if (paymentMethod === 'cash') {
                 SaveItems(basket, totalItemList);
                 setTotalCash(totalCash + price);
@@ -341,7 +341,7 @@ function Buffet() {
                 );
             }
         }
-    },[price, amountReceived, transactionInprogress, change]);
+    },[price, amountReceived, transactionInProgress, change]);
 
     if (currentPage === 'back-to-main') {
         return <MainMenu />;
@@ -376,7 +376,7 @@ function Buffet() {
                             <ProductGroup divClass={'d-flex flex-wrap col-6'} className={'btn btn-warning col-3 flex-fill m-1'} items={products.filter(products => products.type === 'snack')} onClick={(e) => genericHandleItemClicked(e)}/>
                         </div>
                     </div>
-                    <BankNoteButtons onClick={(e) => BanknoteClicked(e, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction)} />
+                    <BankNoteButtons onClick={(e) => BanknoteClicked(e, transactionInProgress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction)} />
                 </div>
                 <div className='col-3 d-flex flex-column flex-fill justify-content-between bg-secondary bg-gradient'>
                     <div className='bg-dark text-white d-flex justify-content-center fs-3 fw-bold'>
@@ -390,19 +390,19 @@ function Buffet() {
                     </div>
                     <div className="d-flex justify-content-around">
                         <div className='col-4 p-1 pt-0 pb-0 d-flex'>
-                            <Button className={'btn btn-primary flex-fill fs-6'} onClick={() => DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived)}>Delete Number</Button>
+                            <Button className={'btn btn-primary flex-fill fs-6'} onClick={() => DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived)}>Delete Number</Button>
                         </div>
                         <div className='col-4 p-1 pt-0 pb-0 d-flex'>
-                            <Button className={'btn btn-primary flex-fill fs-6'} onClick={() => Withdrawal()}>WD</Button>
+                            <Button className={'btn btn-primary flex-fill fs-6'} onClick={() => Withdrawal()}>Withdraw</Button>
                         </div>
                         <div className='col-4 p-1 pt-0 pb-0 d-flex'>
                             <Button className={'btn btn-primary flex-fill fs-6'} onClick={() => Deposit()}>Deposit</Button>
                         </div>
                     </div>
                     <Keypad 
-                        keypad={(e) => HandleKeypadClicked(e, banknoteWasClicked, transactionInprogress, paymentMethod, setTransactionInprogress, amountReceived, setAmountReceived, setBasket, setDisplayTransaction, setPrice, setPaymentMethod, setChange, setBanknoteWasClicked)}
-                        cash={() => CashPayment(price, amountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress)}
-                        credit={() => CreditPayment(setTransactionInprogress, setPaymentMethod, price, paymentMethod, transactionInprogress)}
+                        keypad={(e) => HandleKeypadClicked(e, banknoteWasClicked, transactionInProgress, paymentMethod, setTransactionInProgress, amountReceived, setAmountReceived, setBasket, setDisplayTransaction, setPrice, setPaymentMethod, setChange, setBanknoteWasClicked)}
+                        cash={() => CashPayment(price, amountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, transactionInProgress)}
+                        credit={() => CreditPayment(setTransactionInProgress, setPaymentMethod, price, paymentMethod, transactionInProgress)}
                     />
                 </div>
                 <div className='d-flex flex-column justify-content-between col-1 bg-dark p-2'>

@@ -76,38 +76,38 @@ export function DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmou
     setBanknoteWasClicked(false);
 }
 
-export function CashPayment(price, amountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress) {
-    if (amountReceived >= price && price != 0 && paymentMethod === '' && transactionInprogress) {
+export function CashPayment(price, amountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, transactionInProgress) {
+    if (amountReceived >= price && price != 0 && paymentMethod === '' && transactionInProgress) {
         setChange(amountReceived - price);
-        setTransactionInprogress(false);
+        setTransactionInProgress(false);
         setPaymentMethod('cash');
     }
 }
 
-export function CreditPayment(setTransactionInprogress, setPaymentMethod, price, paymentMethod, transactionInprogress) {
-    if (price > 0 && paymentMethod === '' && transactionInprogress) {
-        setTransactionInprogress(false);
+export function CreditPayment(setTransactionInProgress, setPaymentMethod, price, paymentMethod, transactionInProgress) {
+    if (price > 0 && paymentMethod === '' && transactionInProgress) {
+        setTransactionInProgress(false);
         setPaymentMethod('credit');
     }
 }
 
-export function CashPaymentCashier(transactionPossible, price, amountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress) {
-    if (amountReceived >= price && price != 0 && paymentMethod === '' && transactionInprogress && transactionPossible) {
+export function CashPaymentCashier(transactionPossible, price, amountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, transactionInProgress) {
+    if (amountReceived >= price && price != 0 && paymentMethod === '' && transactionInProgress && transactionPossible) {
         setChange(amountReceived - price);
-        setTransactionInprogress(false);
+        setTransactionInProgress(false);
         setPaymentMethod('cash');
     }
 }
 
-export function CreditPaymentCashier(transactionPossible, setTransactionInprogress, setPaymentMethod, price, paymentMethod, transactionInprogress) {
-    if (price > 0 && paymentMethod === '' && transactionInprogress && transactionPossible) {
-        setTransactionInprogress(false);
+export function CreditPaymentCashier(transactionPossible, setTransactionInProgress, setPaymentMethod, price, paymentMethod, transactionInProgress) {
+    if (price > 0 && paymentMethod === '' && transactionInProgress && transactionPossible) {
+        setTransactionInProgress(false);
         setPaymentMethod('credit');
     }
 }
 
-export function DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived) {
-    if (transactionInprogress || paymentMethod === '') {
+export function DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived) {
+    if (transactionInProgress || paymentMethod === '') {
         setAmountReceived(0);
     }
 }
@@ -138,12 +138,12 @@ export function DeleteLocalStorage() {
     localStorage.clear();
 }
 
-export function BanknoteClicked(e, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction) {
+export function BanknoteClicked(e, transactionInProgress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction) {
     let banknote = e.target.value;
-    if (transactionInprogress && banknote >= price && price > 0) {
+    if (transactionInProgress && banknote >= price && price > 0) {
         setBanknoteWasClicked(true);
         setAmountReceived(banknote);
-        CashPayment(price, banknote, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress);
+        CashPayment(price, banknote, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, transactionInProgress);
     }
     if (paymentMethod !== '') {
         setPaymentMethod('');
@@ -151,12 +151,12 @@ export function BanknoteClicked(e, transactionInprogress, price, setBanknoteWasC
     }
 }
 
-export function BanknoteClickedCashier(e, transactionPossible, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction) {
+export function BanknoteClickedCashier(e, transactionPossible, transactionInProgress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction) {
     let banknote = e.target.value;
-    if (transactionInprogress && banknote >= price && price > 0 && transactionPossible) {
+    if (transactionInProgress && banknote >= price && price > 0 && transactionPossible) {
         setBanknoteWasClicked(true);
         setAmountReceived(banknote);
-        CashPaymentCashier(transactionPossible, price, banknote, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, transactionInprogress);
+        CashPaymentCashier(transactionPossible, price, banknote, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, transactionInProgress);
     }
     if (paymentMethod !== '') {
         setPaymentMethod('');
@@ -164,17 +164,17 @@ export function BanknoteClickedCashier(e, transactionPossible, transactionInprog
     }
 }
 
-export function HandleKeypadClicked(e, banknoteWasClicked, transactionInprogress, paymentMethod, setTransactionInprogress, amountReceived, setAmountReceived, setBasket, setDisplayTransaction, setPrice, setPaymentMethod, setChange, setBanknoteWasClicked) {
+export function HandleKeypadClicked(e, banknoteWasClicked, transactionInProgress, paymentMethod, setTransactionInProgress, amountReceived, setAmountReceived, setBasket, setDisplayTransaction, setPrice, setPaymentMethod, setChange, setBanknoteWasClicked) {
     let key = e.target.value;
     if (!banknoteWasClicked) {
-        if (transactionInprogress && paymentMethod === '') {
+        if (transactionInProgress && paymentMethod === '') {
             if (amountReceived === 0) {
                 setAmountReceived(key);
             } else {
                 setAmountReceived(amountReceived + key);
             }
         }
-        if (!transactionInprogress) {
+        if (!transactionInProgress) {
             if (paymentMethod !== '') {
                 setTransactionInprogress(true);
                 DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
@@ -188,33 +188,33 @@ export function HandleKeypadClicked(e, banknoteWasClicked, transactionInprogress
             }
         }
     } else {
-        if (transactionInprogress && paymentMethod === '') {
+        if (transactionInProgress && paymentMethod === '') {
             if (amountReceived === 0) {
                 setAmountReceived(key);
             } else {
                 setAmountReceived(amountReceived + key);
             }
         }
-        if (!transactionInprogress && paymentMethod !== '') {
-            setTransactionInprogress(true);
+        if (!transactionInProgress && paymentMethod !== '') {
+            setTransactionInProgress(true);
             DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
             setAmountReceived(key);
         }
     }
 }
 
-export function HandleItemClicked(newItem, transactionInprogress, paymentMethod, setTransactionInprogress, setPaymentMethod, setItemClicked, setItemIsClicked, setBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked) {
-    if (!transactionInprogress && paymentMethod === '') {
-        setTransactionInprogress(true);
+export function HandleItemClicked(newItem, transactionInProgress, paymentMethod, setTransactionInProgress, setPaymentMethod, setItemClicked, setItemIsClicked, setBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked) {
+    if (!transactionInProgress && paymentMethod === '') {
+        setTransactionInProgress(true);
         setPaymentMethod('');
         setItemClicked(newItem);
         setItemIsClicked(true);
-    } else if (transactionInprogress && paymentMethod === '') {
+    } else if (transactionInProgress && paymentMethod === '') {
         setItemClicked(newItem);
         setItemIsClicked(true);
     }
-    if (!transactionInprogress && paymentMethod === 'cash' || paymentMethod === 'credit') {
-        setTransactionInprogress(true);
+    if (!transactionInProgress && paymentMethod === 'cash' || paymentMethod === 'credit') {
+        setTransactionInProgress(true);
         setPaymentMethod('');
         setItemClicked(newItem);
         setItemIsClicked(true);
