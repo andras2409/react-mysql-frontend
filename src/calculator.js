@@ -66,7 +66,7 @@ export function DeleteItem(indexToDelete, setBasket, basket, setPrice, price) {
     setPrice(parseInt(newPrice));
 }
 
-export function DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked) {
+export function DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress) {
     setBasket([]);
     setDisplayTransaction('');
     setPrice(0);
@@ -74,6 +74,7 @@ export function DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmou
     setPaymentMethod('');
     setChange(0);
     setBanknoteWasClicked(false);
+    setTransactionInProgress(false);
 }
 
 export function CashPayment(price, amountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, transactionInProgress) {
@@ -125,15 +126,6 @@ export function SaveTickets(soldSeats, savedSeats) {
     }
 }
 
-export function SaveReservations(reservedSeats, savedReservations) {
-    for (let i = 0; i < reservedSeats.length; i++) {
-        console.log('savedReservations before push', savedReservations);
-
-        savedReservations.push(reservedSeats[i]);
-        console.log('reservations saved');
-    }
-}
-
 export function DeleteLocalStorage() {
     localStorage.clear();
 }
@@ -147,7 +139,7 @@ export function BanknoteClicked(e, transactionInProgress, price, setBanknoteWasC
     }
     if (paymentMethod !== '') {
         setPaymentMethod('');
-        DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
+        DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress);
     }
 }
 
@@ -160,7 +152,7 @@ export function BanknoteClickedCashier(e, transactionPossible, transactionInProg
     }
     if (paymentMethod !== '') {
         setPaymentMethod('');
-        DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
+        DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress);
     }
 }
 
@@ -177,7 +169,7 @@ export function HandleKeypadClicked(e, banknoteWasClicked, transactionInProgress
         if (!transactionInProgress) {
             if (paymentMethod !== '') {
                 setTransactionInprogress(true);
-                DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
+                DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress);
                 setAmountReceived(key);
             } else {
                 if (amountReceived === 0) {
@@ -197,7 +189,7 @@ export function HandleKeypadClicked(e, banknoteWasClicked, transactionInProgress
         }
         if (!transactionInProgress && paymentMethod !== '') {
             setTransactionInProgress(true);
-            DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked);
+            DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress);
             setAmountReceived(key);
         }
     }

@@ -1,6 +1,5 @@
 import Cashier from './Cashier';
 import Buffet from './Buffet';
-import Usher from './Usher';
 import Button from './components/Button';
 import LoginPage from './LoginPage';
 import { useState } from 'react';
@@ -41,10 +40,9 @@ function MainMenu() {
         <>
             <Navigation>
                 <DropdownButton title={currentPage}>
-                    <Button id='buffet' className='mb-1' onClick={() => setCurrentPage('buffet')}>Buffet</Button>
-                    <Button id='cashier' className='mb-1' onClick={() => setCurrentPage('cashier')}>Cashier</Button>
-                    <Button id='usher' className='mb-1' onClick={() => setCurrentPage('usher')}>Usher</Button>
-                    <Button id='logout' className='logout-btn' onClick={() => setCurrentPage('logout')}>Logout</Button>
+                    <Button id='buffet' className='btn btn-outline-primary m-1 p-2 fs-5' onClick={() => setCurrentPage('buffet')}>Buffet</Button>
+                    <Button id='cashier' className='btn btn-outline-primary m-1 p-2 fs-5' onClick={() => setCurrentPage('cashier')}>Cashier</Button>
+                    <Button id='logout' className='btn btn-outline-danger m-1 p-2 fs-5' onClick={() => setCurrentPage('logout')}>Logout</Button>
                 </DropdownButton>
             </Navigation>
         </>

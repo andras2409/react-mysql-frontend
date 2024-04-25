@@ -382,8 +382,6 @@ function Cashier() {
             setDisplayAuditorium(
                 <>
                     <Auditorium_1 
-                        setReservationSaved={setReservationSaved}
-                        reservationSaved={reservationSaved}
                         setTransactionPossible={setTransactionPossible}
                         ticketBasket={ticketBasket} 
                         paymentMethod={paymentMethod} 
@@ -455,13 +453,13 @@ function Cashier() {
                         className={'col-1'}
                         topButton={
                             <DropdownButton buttonClass={'m-1 pt-2 pb-2 d-flex align-content-center justify-content-center'} title={currentPage}>
-                                <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
                                 <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('summary')} >Summary</Button>
+                                <Button id={'back-to-main'} className={'btn btn-outline-danger m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
                             </DropdownButton>
                         }
                         onClick={(e) => BanknoteClickedCashier(e, transactionPossible, transactionInprogress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInprogress, setPaymentMethod, paymentMethod, setTicketBasket, setPrice, setDisplayTransaction)}
                     >
-                        <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked)}>Delete Basket</Button>
+                        <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInprogress)}>Delete Basket</Button>
                         <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteLocalStorage()}>Delete Storage</Button>
                     </BankNoteButtons>
                 </div>

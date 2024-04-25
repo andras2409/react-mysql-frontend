@@ -424,8 +424,8 @@ function Buffet() {
                 </div>
                 <div className='d-flex flex-column justify-content-between col-1 bg-dark p-2'>
                     <DropdownButton title={currentPage} buttonClass={"dropdown-toggle"}>
-                        <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
-                        <Button id={'back-to-main'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('summary')}>Summary</Button>
+                        <Button id={'summary'} className={'btn btn-outline-primary m-2 p-2 fs-5'} onClick={() => setCurrentPage('summary')}>Summary</Button>
+                        <Button id={'back-to-main'} className={'btn btn-outline-danger m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
                     </DropdownButton>
                     <div>
                         <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked)}>Delete Basket</Button>
