@@ -13,7 +13,7 @@ function App() {
         .then(res => res.json())
         .then(data => {
             setUserData(data);
-			setTimeout(1000);
+			setTimeout(2500);
             setIsLoading(false);  // Set loading to false once data is fetched
         })
         .catch(err => {
