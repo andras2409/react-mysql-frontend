@@ -33,7 +33,7 @@ function Buffet() {
         .then(res => res.json())
         .then(products => {
             setProducts(products);
-            //setIsLoading(false);
+            setIsLoading(false);
         })
         .catch(err => {
             console.log(err);
