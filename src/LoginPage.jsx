@@ -3,29 +3,18 @@ import Button from './components/Button';
 import MainMenu from './MainMenu';
 import React from 'react';
 
-function LoginPage() { 
+function LoginPage(props) { 
     
-    const [data, setData] = useState([]);
+    
     const [loggedIn, setLoggedIn] = useState(false);
     const [employee, setEmployee] = useState('');
-
-    useEffect(() => {
-        fetch('https://react-mysql-backend.onrender.com/employees')
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => console.log(err));
-    }, [])
-
-    useEffect(() => {
-        console.log(data);
-    });
 
     const handleLogin = () => {
 
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
 
-        data.forEach((user) => {
+        props.userData.forEach((user) => {
             if (user.username === username && user.password === password) {
                 setLoggedIn(true);
                 setEmployee(user);

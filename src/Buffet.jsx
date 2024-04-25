@@ -22,14 +22,23 @@ import Trash from './components/Trash.jsx';
 import Keypad from './components/Keypad.jsx';
 import BankNoteButtons from './components/BankNoteButtons.jsx';
 import Summary from './components/Summary.jsx';
+import ScaleLoader from 'react-spinners/ScaleLoader'
 
 function Buffet() {
+
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('https://react-mysql-backend.onrender.com/products')
         .then(res => res.json())
-        .then(products => setProducts(products))
-        .catch(err => console.log(err));
+        .then(products => {
+            setProducts(products);
+            //setIsLoading(false);
+        })
+        .catch(err => {
+            console.log(err);
+            setIsLoading(false);  // Also set loading to false on error
+        });
     }, [])
 
     const [products, setProducts] = useState([]);    
@@ -353,29 +362,37 @@ function Buffet() {
         <> 
             <div className='d-flex vh-100'>
                 <div className='d-flex col-8 bg-dark bg-gradient p-1'>
-                    <div className='d-flex flex-column flex-fill col-11 overflow-auto'>
-                        <div className="d-flex col-12">
-                            <div className='col-8'>
-                                <ProductGroup  divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcorn')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcornmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-danger-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'pepsidrink')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachos')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachosmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
+                    {
+                        isLoading ?
+                        <div className='d-flex flex-column flex-fill justify-content-center align-items-center col-11 bg-dark'>
+                            <ScaleLoader className='mb-5' color='#61BDFB'/>
+                            <h3 className='text-white'>Database is loading...</h3>
+                        </div>
+                        :
+                        <div className='d-flex flex-column flex-fill col-11 overflow-auto'>
+                            <div className="d-flex col-12">
+                                <div className='col-8'>
+                                    <ProductGroup  divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcorn')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcornmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-danger-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'pepsidrink')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachos')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachosmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                </div>
+                                <ProductGroup divClass={'col-2 d-flex flex-column'} className={'btn btn-dark flex-fill m-1'} items={products.filter(products => products.type === 'extra')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                <div className='d-flex flex-column col-2'>
+                                    <ProductGroup divClass={'col d-flex flex-column'} className={'btn btn-secondary flex-fill m-1'} items={products.filter(products => products.type === 'snackgram')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'col d-flex flex-column'} className={'btn btn-secondary flex-fill m-1'} items={products.filter(products => products.type === 'energydrink')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                </div>
                             </div>
-                            <ProductGroup divClass={'col-2 d-flex flex-column'} className={'btn btn-dark flex-fill m-1'} items={products.filter(products => products.type === 'extra')} onClick={(e) => genericHandleItemClicked(e)}/>
-                            <div className='d-flex flex-column col-2'>
-                                <ProductGroup divClass={'col d-flex flex-column'} className={'btn btn-secondary flex-fill m-1'} items={products.filter(products => products.type === 'snackgram')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'col d-flex flex-column'} className={'btn btn-secondary flex-fill m-1'} items={products.filter(products => products.type === 'energydrink')} onClick={(e) => genericHandleItemClicked(e)}/>
+                            <div className='d-flex col-12'>
+                                <div className="col-6 d-flex flex-column justify-content-between">
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-success col-3 flex-fill m-1'} items={products.filter(products => products.type === 'bottleddrink')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-danger col-1 flex-fill m-1'} items={products.filter(products => products.type === 'alcoholicdrink')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                </div>
+                                <ProductGroup divClass={'d-flex flex-wrap col-6'} className={'btn btn-warning col-3 flex-fill m-1'} items={products.filter(products => products.type === 'snack')} onClick={(e) => genericHandleItemClicked(e)}/>
                             </div>
                         </div>
-                        <div className='d-flex col-12'>
-                            <div className="col-6 d-flex flex-column justify-content-between">
-                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-success col-3 flex-fill m-1'} items={products.filter(products => products.type === 'bottleddrink')} onClick={(e) => genericHandleItemClicked(e)}/>
-                                <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-danger col-1 flex-fill m-1'} items={products.filter(products => products.type === 'alcoholicdrink')} onClick={(e) => genericHandleItemClicked(e)}/>
-                            </div>
-                            <ProductGroup divClass={'d-flex flex-wrap col-6'} className={'btn btn-warning col-3 flex-fill m-1'} items={products.filter(products => products.type === 'snack')} onClick={(e) => genericHandleItemClicked(e)}/>
-                        </div>
-                    </div>
+                    }
                     <BankNoteButtons onClick={(e) => BanknoteClicked(e, transactionInProgress, price, setBanknoteWasClicked, setAmountReceived, setChange, setTransactionInProgress, setPaymentMethod, paymentMethod, setBasket, setPrice, setDisplayTransaction)} />
                 </div>
                 <div className='col-3 d-flex flex-column flex-fill justify-content-between bg-secondary bg-gradient'>
