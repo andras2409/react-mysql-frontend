@@ -37,7 +37,7 @@ function Buffet() {
         })
         .catch(err => {
             console.log(err);
-            setIsLoading(false);  // Also set loading to false on error
+            setIsLoading(false);
         });
     }, [])
 

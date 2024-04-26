@@ -3,7 +3,7 @@ import TicketMenu from '../TicketMenu';
 import { HandleItemClicked, SaveTickets } from '../../calculator';
 import { Modal } from 'react-bootstrap';
 
-const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, movieNumber, currentAud, tickets, setCurrentAud, transactionInprogress, setTransactionInprogress, setPaymentMethod, setTicketClicked, setTicketIsClicked, setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked }) => {
+const Auditorium_1 = ({ isLoading, setTransactionPossible, ticketBasket, paymentMethod, movieNumber, currentAud, tickets, setCurrentAud, transactionInprogress, setTransactionInprogress, setPaymentMethod, setTicketClicked, setTicketIsClicked, setTicketBasket, setDisplayTransaction, setPrice, setAmountReceived, setChange, setBanknoteWasClicked }) => {
 
     const seats = document.querySelectorAll('.seat');
     const [numberOfTickets, setNumberOfTickets] = useState(0);
@@ -162,7 +162,6 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
     function handleSavingReservations() {
         setSavingReservations(true);
     }
-    
 
     return (
         <>
@@ -901,7 +900,7 @@ const Auditorium_1 = ({ setTransactionPossible, ticketBasket, paymentMethod, mov
                 </Modal.Body>
                 
             </Modal>
-            <TicketMenu back={() => setCurrentAud(0)} tickets={tickets} onClick={(e) => genericHandleTicketClicked(e)} onClickReservation={() => {
+            <TicketMenu isLoading={isLoading} back={() => setCurrentAud(0)} tickets={tickets} onClick={(e) => genericHandleTicketClicked(e)} onClickReservation={() => {
                 handleSavingReservations();
                 setShowModal(true);
             }}/>

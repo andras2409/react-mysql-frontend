@@ -26,11 +26,19 @@ import Trash from './components/Trash.jsx';
 
 function Cashier() {
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         fetch('https://react-mysql-backend.onrender.com/tickets')
         .then(res => res.json())
-        .then(tickets => setTickets(tickets))
-        .catch(err => console.log(err));
+        .then(tickets => {
+            setTickets(tickets);
+            setIsLoading(false);
+        })
+        .catch(err => {
+            console.log(err);
+            setIsLoading(false);
+        });
     }, [])
 
     const [currentPage, setCurrentPage] = useState('Cashier');
@@ -382,6 +390,7 @@ function Cashier() {
             setDisplayAuditorium(
                 <>
                     <Auditorium_1 
+                        isLoading={isLoading}
                         setTransactionPossible={setTransactionPossible}
                         ticketBasket={ticketBasket} 
                         paymentMethod={paymentMethod} 
