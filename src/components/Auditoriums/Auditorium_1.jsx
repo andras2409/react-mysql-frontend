@@ -898,7 +898,6 @@ const Auditorium_1 = ({ isLoading, setTransactionPossible, ticketBasket, payment
                         </ul>
                     </div>
                 </Modal.Body>
-                
             </Modal>
             <TicketMenu isLoading={isLoading} back={() => setCurrentAud(0)} tickets={tickets} onClick={(e) => genericHandleTicketClicked(e)} onClickReservation={() => {
                 handleSavingReservations();

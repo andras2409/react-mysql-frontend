@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from './components/Button';
 import MainMenu from './MainMenu';
-import React from 'react';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 
 function LoginPage() { 
@@ -78,7 +77,6 @@ function LoginPage() {
                     </div>
                 </div> 
 			}
-              
         </>
     );
 }
