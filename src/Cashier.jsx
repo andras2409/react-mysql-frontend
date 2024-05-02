@@ -22,6 +22,7 @@ import Summary from './components/Summary.jsx';
 import MovieButton from './components/MovieButton.jsx';
 import Auditorium_1 from './components/Auditoriums/Auditorium_1.jsx';
 import Auditorium_2 from './components/Auditoriums/Auditorium_2.jsx';
+import Auditorium_3 from './components/Auditoriums/Auditorium_3.jsx';
 import Trash from './components/Trash.jsx';
 
 function Cashier() {
@@ -383,6 +384,21 @@ function Cashier() {
                             />
                         ))}
                     </div>
+                    {/*<div className='d-flex justify-content-start p-1 pt-0'>
+                        {roomOne.map((movie, index) => (
+                            <MovieButton 
+                                key={index}
+                                title={movie.title}
+                                startingTime={movie.startingTime}
+                                classification={movie.classification}
+                                seats={movie.seats}
+                                onClick={() => {
+                                    setCurrentAud(3);
+                                    setCurrentSerialNumber(movie.number);
+                                }}
+                            />
+                        ))}
+                    </div>*/}
                 </>
             );
         }
@@ -443,6 +459,35 @@ function Cashier() {
                 </>
             );
         }
+        /*if (currentAud === 3) {
+            setDisplayAuditorium(
+                <>
+                    <Auditorium_3 
+                        setReservationSaved={setReservationSaved}
+                        reservationSaved={reservationSaved}
+                        setTransactionPossible={setTransactionPossible}
+                        ticketBasket={ticketBasket} 
+                        paymentMethod={paymentMethod} 
+                        movieNumber={currentSerialNumber} 
+                        currentAud={currentAud} 
+                        tickets={tickets} 
+                        setCurrentAud={setCurrentAud} 
+                        transactionInprogress={transactionInprogress}
+                        setTransactionInprogress={setTransactionInprogress}
+                        setPaymentMethod={setPaymentMethod}
+                        setTicketClicked={setTicketClicked}
+                        setTicketIsClicked={setTicketIsClicked}
+                        setTicketBasket={setTicketBasket}
+                        setDisplayTransaction={setDisplayTransaction}
+                        setPrice={setPrice}
+                        setAmountReceived={setAmountReceived}
+                        setChange={setChange}
+                        setBanknoteWasClicked={setBanknoteWasClicked}
+                    />
+                    
+                </>
+            );
+        }*/
     },[currentAud, paymentMethod, ticketBasket]);
 
     if (currentPage === 'back-to-main') {

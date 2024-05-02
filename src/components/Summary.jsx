@@ -14,6 +14,31 @@ const Summary = ( props ) => {
     const [totalWithdrawal, setTotalWithdrawal] = useState(() => JSON.parse(localStorage.getItem('totalWithdrawal')) || 0);
     const [totalDeposit, setTotalDeposit] = useState(() => JSON.parse(localStorage.getItem('totalDeposit')) || 0);
 
+    const aggregateItems = (totalItemList) => {
+        const itemMap = {};
+    
+        totalItemList.forEach((item) => {
+            if (itemMap[item.name]) {
+                itemMap[item.name].amount += item.amount;
+                itemMap[item.name].totalPrice += item.amount * item.price;
+            } else {
+                itemMap[item.name] = {
+                    amount: item.amount,
+                    price: item.price,
+                    totalPrice: item.amount * item.price
+                };
+            }
+        });
+    
+        return Object.entries(itemMap).map(([name, details]) => ({
+            name,
+            amount: details.amount,
+            price: details.price,
+            totalPrice: details.totalPrice
+        }));
+    }
+    
+
     if (currentPage === 'Buffet') {
         return <Buffet />;
     }
@@ -34,15 +59,15 @@ const Summary = ( props ) => {
                     <div className='col-4 fs-5 fw-bold'>Price</div>
                 </div>
                 <hr className='m-1'/>
-                {totalItemList.map((item, index) => (
-                    <>
-                        <div className='d-flex'>
-                            <div className='col-4'>{item.name}</div>
-                            <div className='col-4 d-flex justify-content-center'>{item.amount}</div>
-                            <div className='col-4'>{item.price}</div>
-                        </div>
-                        <hr className='m-1'/>
-                    </>
+                {aggregateItems(totalItemList).map((item, index) => (
+                <>
+                    <div className='d-flex'>
+                        <div className='col-4'>{item.name}</div>
+                        <div className='col-4 d-flex justify-content-center'>{item.amount}</div>
+                        <div className='col-4'>{item.totalPrice}</div>
+                    </div>
+                    <hr className='m-1'/>
+                </>
                 ))}
             </div>
             <div className='p-4 col-4 fw-bold'>

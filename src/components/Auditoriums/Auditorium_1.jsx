@@ -22,7 +22,6 @@ const Auditorium_1 = ({ isLoading, setTransactionPossible, ticketBasket, payment
 
     const [showModal, setShowModal] = useState(false);
 
-    //const handleShow = () => setShowModal(true);
     const handleClose = () => {
         setShowModal(false);
         setNewReservations([]);

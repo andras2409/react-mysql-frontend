@@ -190,7 +190,7 @@ function Buffet() {
                     );
                     setDeposit(false);
                     setCurrentDeposit(0);
-                    DeleteNumbers(transactionInprogress, paymentMethod, setAmountReceived);
+                    DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                 }
             }
         }
@@ -225,7 +225,6 @@ function Buffet() {
                         setCurrentWithdrawalAmount(0);
                         DeleteNumbers(transactionInProgress, paymentMethod, setAmountReceived);
                     }
-                    
                 }
                 if (!transactionInProgress) {
                     if (paymentMethod === '') {
@@ -372,7 +371,7 @@ function Buffet() {
                         <div className='d-flex flex-column flex-fill col-11 overflow-auto'>
                             <div className="d-flex col-12">
                                 <div className='col-8'>
-                                    <ProductGroup  divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcorn')} onClick={(e) => genericHandleItemClicked(e)}/>
+                                    <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcorn')} onClick={(e) => genericHandleItemClicked(e)}/>
                                     <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-primary-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'popcornmenu')} onClick={(e) => genericHandleItemClicked(e)}/>
                                     <ProductGroup divClass={'d-flex flex-wrap'} className={'btn bg-danger-subtle col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'pepsidrink')} onClick={(e) => genericHandleItemClicked(e)}/>
                                     <ProductGroup divClass={'d-flex flex-wrap'} className={'btn btn-primary col-3 m-1 p-2 flex-fill'} items={products.filter(products => products.type === 'nachos')} onClick={(e) => genericHandleItemClicked(e)}/>
@@ -428,7 +427,7 @@ function Buffet() {
                         <Button id={'back-to-main'} className={'btn btn-outline-danger m-2 p-2 fs-5'} onClick={() => setCurrentPage('back-to-main')}>Back To Main Menu</Button>
                     </DropdownButton>
                     <div>
-                        <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked)}>Delete Basket</Button>
+                        <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress)}>Delete Basket</Button>
                         <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteLocalStorage()}>Delete Storage</Button>
                     </div>
                 </div>
