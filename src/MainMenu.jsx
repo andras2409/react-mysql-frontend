@@ -2,7 +2,7 @@ import Cashier from './Cashier';
 import Buffet from './Buffet';
 import Button from './components/Button';
 import LoginPage from './LoginPage';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import Navigation from './components/Navigation';
 import DropdownButton from './components/DropdownButton';
@@ -20,7 +20,7 @@ import DropdownButton from './components/DropdownButton';
 })()*/
 
 
-function MainMenu({ employee }) {
+function MainMenu() {
 
     const [currentPage, setCurrentPage] = useState('Main Menu');
 
@@ -42,9 +42,9 @@ function MainMenu({ employee }) {
                     <Button id='cashier' className='btn btn-outline-primary m-1 p-2 fs-5' onClick={() => setCurrentPage('cashier')}>Cashier</Button>
                     <Button id='logout' className='btn btn-outline-danger m-1 p-2 fs-5' onClick={() => setCurrentPage('logout')}>Logout</Button>
                 </DropdownButton>
-                <div className='d-flex justify-content-center align-items-center text-white fs-5 me-3'>
+                {/*<div className='d-flex justify-content-center align-items-center text-white fs-5 me-3'>
                     {employee.username}
-                </div>
+                </div>*/}
             </Navigation>
         </>
     );

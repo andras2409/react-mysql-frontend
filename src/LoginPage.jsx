@@ -48,7 +48,7 @@ function LoginPage() {
     }
     
     if (loggedIn === true) {
-        return <MainMenu employee={employee}/>;
+        return <MainMenu />;
     }
 
     return (
