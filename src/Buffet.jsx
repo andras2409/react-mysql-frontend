@@ -428,7 +428,7 @@ function Buffet() {
                     </DropdownButton>
                     <div>
                         <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteBasket(setBasket, setDisplayTransaction, setPrice, setAmountReceived, setPaymentMethod, setChange, setBanknoteWasClicked, setTransactionInProgress)}>Delete Basket</Button>
-                        <Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteLocalStorage()}>Delete Storage</Button>
+                        {/*<Button className={'btn btn-primary fs-6 m-1'} onClick={() => DeleteLocalStorage()}>Delete Storage</Button>*/}
                     </div>
                 </div>
             </div>
